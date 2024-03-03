@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LluisJs</title>
+    <link rel="stylesheet" href="/assets/main.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="log"></div>
+    <script type="module" src="/assets/main.js"></script>
+    <script>
+      (function () {
+        var old = console.log;
+        var logger = document.querySelector('#log');
+        console.log = function () {
+          for (var i = 0; i < arguments.length; i++) {
+            if (typeof arguments[i] == 'object') {
+                logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+            } else {
+                logger.innerHTML += arguments[i] + '<br />';
+            }
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
